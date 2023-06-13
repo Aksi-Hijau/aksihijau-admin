@@ -11,7 +11,6 @@ import {
 } from '@/components/_dashboard/app';
 import useFetcher from "../hooks/useFetcher"
 import { API_URL } from "../config/api.js"
-import axios from 'axios';
 
 interface SummaryDataState {
     activeUsers: number;
