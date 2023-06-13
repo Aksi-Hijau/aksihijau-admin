@@ -11,6 +11,7 @@ import User from '@/pages/User';
 import NotFound from '@/pages/Page404';
 import Campaigns from './pages/Campaigns';
 import MainLayout from './layouts/MainLayout';
+import Logout from './pages/Logout';
 
 export const Router = (): ReactElement => {
     return (
@@ -27,6 +28,7 @@ export const Router = (): ReactElement => {
                 <Route path="404" element={<NotFound />} />
                 <Route path="" element={<Navigate to="/dashboard" />} />
                 <Route path="*" element={<Navigate to="/404" />} />
+                <Route path='logout' element={<Logout />} />
             </Route>
         </Routes>
     );

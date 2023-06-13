@@ -34,7 +34,10 @@ const MainLayout = ({ children }) => {
 
   const handleGetDataUser = async () => {
     try {
-      const response = await fetcher(`${API_URL}/user`)
+      const response = await fetcher(`${API_URL}/user`, { 
+        headers: { Authorization: `Bearer ${accessToken}`,
+        'x-refresh': refreshToken } 
+      })
       setUserProfile(response.data.data)
     } catch (error) {
       console.log(error)
