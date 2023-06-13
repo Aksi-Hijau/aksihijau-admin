@@ -10,21 +10,7 @@ import MenuPopover from '@/components/MenuPopover';
 import account from '@/_mocks_/account';
 
 const MENU_OPTIONS = [
-    {
-        label: 'Home',
-        icon: homeFill,
-        linkTo: '/'
-    },
-    {
-        label: 'Profile',
-        icon: personFill,
-        linkTo: '#'
-    },
-    {
-        label: 'Settings',
-        icon: settings2Fill,
-        linkTo: '#'
-    }
+    
 ];
 
 const AccountPopover = (): JSX.Element => {

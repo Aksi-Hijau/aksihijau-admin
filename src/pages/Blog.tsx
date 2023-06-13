@@ -17,7 +17,7 @@ const SORT_OPTIONS = [
 
 const Blog = (): JSX.Element => {
     return (
-        <Page title="Dashboard: Blog | Minimal-UI">
+        <Page title="Dashboard: Blog | AksiHijau">
             <Container>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                     <Typography variant="h4" gutterBottom>

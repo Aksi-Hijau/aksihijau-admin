@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
-import LogoImage from '@/assets/images/logo.svg';
+import LogoImage from '@/assets/images/aksihijau.svg';
 
 interface Props {
     sx?;
@@ -8,7 +8,7 @@ interface Props {
 
 const Logo = (props: Props): JSX.Element => {
     const { sx } = props;
-    return <Box component="img" src={LogoImage} sx={{ width: 40, height: 40, ...sx }} />;
+    return <Box component="img" src={LogoImage} sx={{ width: 50, height: 50, ...sx }} />;
 };
 
 export default Logo;

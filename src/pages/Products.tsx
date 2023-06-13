@@ -42,7 +42,7 @@ const EcommerceShop = (): JSX.Element => {
     };
 
     return (
-        <Page title="Dashboard: Products | Minimal-UI">
+        <Page title="Dashboard: Products | AksiHijau">
             <Container>
                 <Typography variant="h4" sx={{ mb: 5 }}>
                     Products
