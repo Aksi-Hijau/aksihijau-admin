@@ -37,12 +37,6 @@ const ContentStyle = styled('div')(({ theme }) => ({
 const Login = (): JSX.Element => {
     return (
         <RootStyle>
-            <AuthLayout>
-                Don’t have an account? &nbsp;
-                <Link underline="none" variant="subtitle2" component={RouterLink} to="/register">
-                    Get started
-                </Link>
-            </AuthLayout>
 
             <MHidden width="mdDown">
                 <SectionStyle>
@@ -63,7 +57,6 @@ const Login = (): JSX.Element => {
                             Enter your details below.
                         </Typography>
                     </Stack>
-                    <AuthSocial />
 
                     <LoginForm />
 
