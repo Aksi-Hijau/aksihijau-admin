@@ -1,3 +1,3 @@
-const API_URL = "http://localhost:8080/api";
+const API_URL = "https://rational-text-381300.et.r.appspot.com";
 
 export { API_URL };
