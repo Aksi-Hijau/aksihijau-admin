@@ -168,6 +168,19 @@ const Campaigns = (): JSX.Element => {
       setFilterName(event.target.value);
   };
 
+  const handleUpdateStatus = async (campaignSlug: string, status: string) => {
+    try {
+        const response = await fetcher(`${API_URL}/campaigns/${campaignSlug}`, {
+            method: 'PUT'
+        }, {
+            status: status
+        })
+        getCampaigns()
+    } catch (error) {
+        console.log(error)
+    }
+  }
+
     return (
         <Page title="Campaign">
             <Container>
@@ -256,7 +269,7 @@ const Campaigns = (): JSX.Element => {
                                                     </TableCell>
 
                                                     <TableCell align="right">
-                                                        <UserMoreMenu />
+                                                        <UserMoreMenu status={status} slug={slug} handleUpdateStatus={handleUpdateStatus} />
                                                     </TableCell>
                                                 </TableRow>
                                             );

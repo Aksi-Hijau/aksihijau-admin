@@ -15,12 +15,16 @@ import {
     FormControlLabel
 } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
+import axios from 'axios';
+import { API_URL } from "@/config/api.js"
+import useLocalStorage from '@/hooks/useLocalStorage';
 
 // ----------------------------------------------------------------------
 
 const LoginForm = (): JSX.Element => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
+    const [userData, setUserData] = useLocalStorage('userData')
 
     const LoginSchema = Yup.object().shape({
         email: Yup.string()
@@ -29,6 +33,25 @@ const LoginForm = (): JSX.Element => {
         password: Yup.string().required('Password is required')
     });
 
+    const handleLogin = async (values) => {
+        try {
+            const response = await axios.post(`${API_URL}/sessions`, values)
+            if (response.status === 201 && response.data.data.role === 'admin') {
+                setUserData({ accessToken: response.data.data.accessToken, refreshToken: response.data.data.refreshToken })
+                navigate('/dashboard', { replace: true });
+            } else {
+                formik.setFieldError('email', 'Email or password is wrong')
+                formik.setFieldError('password', 'Email or password is wrong')
+            }
+        } catch (error: any) {
+            if (error.response && error.response.status === 401) {
+                formik.setFieldError('email', 'Email or password is wrong')
+                formik.setFieldError('password', 'Email or password is wrong')
+            }
+            console.log(error)
+        }
+    }
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -36,10 +59,9 @@ const LoginForm = (): JSX.Element => {
             remember: true
         },
         validationSchema: LoginSchema,
-        onSubmit: () => {
-            navigate('/dashboard', { replace: true });
-        }
+        onSubmit: handleLogin
     });
+
 
     const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 

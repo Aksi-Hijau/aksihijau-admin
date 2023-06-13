@@ -3,7 +3,7 @@ import React, { useContext, useRef, useState } from 'react';
 import homeFill from '@iconify/icons-eva/home-fill';
 import personFill from '@iconify/icons-eva/person-fill';
 import settings2Fill from '@iconify/icons-eva/settings-2-fill';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link, Link as RouterLink } from 'react-router-dom';
 import { alpha } from '@material-ui/core/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@material-ui/core';
 import MenuPopover from '@/components/MenuPopover';
@@ -92,9 +92,11 @@ const AccountPopover = (props): JSX.Element => {
                 ))}
 
                 <Box sx={{ p: 2, pt: 1.5 }}>
-                    <Button fullWidth color="inherit" variant="outlined">
-                        Logout
-                    </Button>
+                    <Link to="/logout">
+                        <Button fullWidth color="inherit" variant="outlined">
+                            Logout
+                        </Button>
+                    </Link>
                 </Box>
             </MenuPopover>
         </>
