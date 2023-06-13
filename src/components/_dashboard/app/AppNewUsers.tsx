@@ -31,13 +31,13 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 const TOTAL = 1352831;
 
-const AppNewUsers = (): JSX.Element => {
+const AppNewUsers = ({ total }): JSX.Element => {
     return (
         <RootStyle>
             <IconWrapperStyle>
                 <Icon icon="ri:user-5-fill" width={24} height={24} />
             </IconWrapperStyle>
-            <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+            <Typography variant="h3">{fShortenNumber(total)}</Typography>
             <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
                 Active Users
             </Typography>

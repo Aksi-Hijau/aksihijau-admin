@@ -32,13 +32,13 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 const TOTAL = 10;
 
-export const AppTransaction = (): JSX.Element => {
+export const AppTransaction = ({ total }): JSX.Element => {
     return (
         <RootStyle>
             <IconWrapperStyle>
                 <Icon icon="icon-park-solid:transaction" width={24} height={24} />
             </IconWrapperStyle>
-            <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+            <Typography variant="h3">{fShortenNumber(total)}</Typography>
             <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
                 Success Transaction
             </Typography>

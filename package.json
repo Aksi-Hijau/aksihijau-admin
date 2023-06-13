@@ -42,6 +42,7 @@
     "@material-ui/utils": "^5.0.0-beta.4",
     "@testing-library/jest-dom": "^5.16.5",
     "apexcharts": "^3.37.0",
+    "axios": "^1.4.0",
     "change-case": "^4.1.2",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",
