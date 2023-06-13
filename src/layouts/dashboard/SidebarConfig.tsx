@@ -23,9 +23,9 @@ const sidebarConfig: NavItemConfig[] = [
         icon: getIcon(peopleFill)
     },
     {
-        title: 'product',
-        path: '/dashboard/products',
-        icon: getIcon(shoppingBagFill)
+        title: 'campaigns',
+        path: '/dashboard/campaigns',
+        icon: getIcon("ph:tree-fill")
     },
     {
         title: 'blog',

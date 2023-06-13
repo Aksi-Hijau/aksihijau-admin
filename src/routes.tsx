@@ -9,6 +9,7 @@ import Products from '@/pages/Products';
 import Blog from '@/pages/Blog';
 import User from '@/pages/User';
 import NotFound from '@/pages/Page404';
+import Campaigns from './pages/Campaigns';
 
 export const Router = (): ReactElement => {
     return (
@@ -17,6 +18,7 @@ export const Router = (): ReactElement => {
                 <Route path="" element={<Navigate to="/dashboard/app" replace />} />
                 <Route path="app" element={<DashboardApp />} />
                 <Route path="user" element={<User />} />
+                <Route path="campaigns" element={<Campaigns />} />
                 <Route path="products" element={<Products />} />
                 <Route path="blog" element={<Blog />} />
             </Route>

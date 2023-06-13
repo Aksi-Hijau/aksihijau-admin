@@ -11,10 +11,11 @@ interface Props {
     numSelected: number;
     onRequestSort;
     onSelectAllClick;
+    checkbox?;
 }
 
 const UserListHead = (props: Props): JSX.Element => {
-    const { order, orderBy, rowCount, headLabel, numSelected, onRequestSort, onSelectAllClick } =
+    const { order, checkbox, orderBy, rowCount, headLabel, numSelected, onRequestSort, onSelectAllClick } =
         props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
@@ -23,13 +24,15 @@ const UserListHead = (props: Props): JSX.Element => {
     return (
         <TableHead>
             <TableRow>
-                <TableCell padding="checkbox">
-                    <Checkbox
-                        indeterminate={numSelected > 0 && numSelected < rowCount}
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                    />
-                </TableCell>
+                {checkbox ? (
+                    <TableCell padding="checkbox">
+                        <Checkbox
+                            indeterminate={numSelected > 0 && numSelected < rowCount}
+                            checked={rowCount > 0 && numSelected === rowCount}
+                            onChange={onSelectAllClick}
+                        />
+                    </TableCell>
+                ) : ''}
                 {headLabel.map((headCell) => (
                     <TableCell
                         key={headCell.id}
