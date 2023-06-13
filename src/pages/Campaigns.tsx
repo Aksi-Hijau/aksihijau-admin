@@ -178,11 +178,11 @@ const Campaigns = (): JSX.Element => {
                 </Stack>
 
                 <Card>
-                    <UserListToolbar
+                    {/* <UserListToolbar
                         numSelected={selected.length}
                         filterName={filterName}
                         onFilterName={handleFilterByName}
-                    />
+                    /> */}
 
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>

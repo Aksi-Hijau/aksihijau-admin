@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { styled } from '@material-ui/core/styles';
 import { Box, Link, Drawer, Typography, Avatar } from '@material-ui/core';
@@ -7,7 +7,7 @@ import Scrollbar from '@/components/Scrollbar';
 import NavSection from '@/components/NavSection';
 import { MHidden } from '@/components/@material-extend';
 import sidebarConfig from './SidebarConfig';
-import account from '@/_mocks_/account';
+import { UserContext } from '@/context/UserContext'
 
 const DRAWER_WIDTH = 280;
 
@@ -35,6 +35,8 @@ const DashboardSidebar = (props: Props): JSX.Element => {
     const { isOpenSidebar, onCloseSidebar } = props;
     const { pathname } = useLocation();
 
+    const { user } = useContext(UserContext)
+
     useEffect(() => {
         if (isOpenSidebar) {
             onCloseSidebar();
@@ -57,13 +59,13 @@ const DashboardSidebar = (props: Props): JSX.Element => {
             <Box sx={{ mb: 5, mx: 2.5 }}>
                 <Link underline="none" component={RouterLink} to="#">
                     <AccountStyle>
-                        <Avatar src={account.photoURL} alt="photoURL" />
+                        <Avatar src={user?.photo} alt="photoURL" />
                         <Box sx={{ ml: 2 }}>
                             <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                                {account.displayName}
+                                {user?.name}
                             </Typography>
                             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                                {account.role}
+                                {user?.role}
                             </Typography>
                         </Box>
                     </AccountStyle>

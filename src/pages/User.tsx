@@ -161,11 +161,11 @@ const User = (): JSX.Element => {
                 </Stack>
 
                 <Card>
-                    <UserListToolbar
+                    {/* <UserListToolbar
                         numSelected={selected.length}
                         filterName={filterName}
                         onFilterName={handleFilterByName}
-                    />
+                    /> */}
 
                     <Scrollbar>
                         <TableContainer sx={{ minWidth: 800 }}>
@@ -202,14 +202,6 @@ const User = (): JSX.Element => {
                                                     selected={isItemSelected}
                                                     aria-checked={isItemSelected}
                                                 >
-                                                    <TableCell padding="checkbox">
-                                                        <Checkbox
-                                                            checked={isItemSelected}
-                                                            onChange={(event) =>
-                                                                handleClick(event, name)
-                                                            }
-                                                        />
-                                                    </TableCell>
                                                     <TableCell
                                                         component="th"
                                                         scope="row"

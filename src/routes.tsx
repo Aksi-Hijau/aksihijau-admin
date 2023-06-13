@@ -10,17 +10,16 @@ import Blog from '@/pages/Blog';
 import User from '@/pages/User';
 import NotFound from '@/pages/Page404';
 import Campaigns from './pages/Campaigns';
+import MainLayout from './layouts/MainLayout';
 
 export const Router = (): ReactElement => {
     return (
         <Routes>
             <Route path="/dashboard" element={<DashboardLayout />}>
                 <Route path="" element={<Navigate to="/dashboard/app" replace />} />
-                <Route path="app" element={<DashboardApp />} />
-                <Route path="user" element={<User />} />
-                <Route path="campaigns" element={<Campaigns />} />
-                <Route path="products" element={<Products />} />
-                <Route path="blog" element={<Blog />} />
+                <Route path="app" element={<MainLayout><DashboardApp /></MainLayout>} />
+                <Route path="user" element={<MainLayout><User /></MainLayout>} />
+                <Route path="campaigns" element={<MainLayout><Campaigns /></MainLayout>} />
             </Route>
             <Route path="/" element={<LogoOnlyLayout />}>
                 <Route path="login" element={<Login />} />

@@ -7,13 +7,17 @@ import { HelmetProvider } from 'react-helmet-async';
 import ThemeConfig from '@/theme';
 import ScrollToTop from '@/components/ScrollToTop';
 import Router from '@/routes';
+import MainLayout from './layouts/MainLayout';
+import { UserProvider } from './context/UserContext';
 
 const App = (): JSX.Element => {
     return (
-        <ThemeConfig>
-            <ScrollToTop />
-            <Router />
-        </ThemeConfig>
+        <UserProvider>
+            <ThemeConfig>
+                <ScrollToTop />
+                <Router />
+            </ThemeConfig>
+        </UserProvider>
     );
 };
 

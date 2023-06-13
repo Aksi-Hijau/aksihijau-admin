@@ -7,8 +7,9 @@ axios.defaults.headers.common["Accept"] = "application/json";
 
 const axiosInterceptor = (userData) => {
   axios.interceptors.request.use((config) => {
-    if (userData.token) {
-      config.headers.Authorization = `Bearer ${userData.token}`;
+    if (userData.accessToken) {
+      config.headers.Authorization = `Bearer ${userData.accessToken}`;
+      config.headers['x-refresh'] = `${userData.refreshToken}`;
     }
     return config;
   });
