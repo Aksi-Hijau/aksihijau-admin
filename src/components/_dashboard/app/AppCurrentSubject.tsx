@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
 import { useTheme, styled } from '@material-ui/core/styles';
 import { Card, CardHeader } from '@material-ui/core';
 import { BaseOptionChart } from '@/components/charts';
 import { ApexOptions } from 'apexcharts';
+import useFetcher from '@/hooks/useFetcher';
+import { API_URL } from '@/config/api.js'
 
 const CHART_HEIGHT = 392;
 const LEGEND_HEIGHT = 72;
@@ -30,20 +32,22 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 const CHART_DATA = [
-    { name: 'Series 1', data: [80, 50, 30, 40, 100, 20] },
-    { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
-    { name: 'Series 3', data: [44, 76, 78, 13, 43, 10] }
+    { name: 'Payment Method', data: [] },
 ];
 
 const AppCurrentSubject = (): JSX.Element => {
     const theme = useTheme();
+    const [categories, setCategories] = useState<String[]>([])
+    const [count, setCount] = useState<Number[]>([])
+
+    const fetcher = useFetcher()
 
     const chartOptions: ApexOptions = merge(BaseOptionChart(), {
         stroke: { width: 2 },
         fill: { opacity: 0.48 },
         legend: { floating: true, horizontalAlign: 'center' },
         xaxis: {
-            categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
+            categories: categories,
             labels: {
                 style: {
                     colors: [
@@ -56,16 +60,40 @@ const AppCurrentSubject = (): JSX.Element => {
                     ]
                 }
             }
+        },
+        yaxis: {
+            show: false
         }
     });
 
+    const getPaymentsDistributions = async () => {
+        try {
+            const response = await fetcher(`${API_URL}/payments/distributions`)
+            setCategories(response.data.data.categories)
+            setCount(response.data.data.count)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const chartData = [
+        {
+            ...CHART_DATA[0],
+            data: count
+        }
+    ]
+
+    useEffect(() => {
+        getPaymentsDistributions()
+    }, [])
+
     return (
         <Card>
-            <CardHeader title="Current Donation Status" />
+            <CardHeader title="Payment Method Distribution" />
             <ChartWrapperStyle dir="ltr">
                 <ReactApexChart
                     type="radar"
-                    series={CHART_DATA}
+                    series={chartData}
                     options={chartOptions}
                     height={340}
                 />

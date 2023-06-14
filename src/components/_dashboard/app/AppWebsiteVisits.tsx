@@ -1,46 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
 import { Card, CardHeader, Box } from '@material-ui/core';
 import { BaseOptionChart } from '../../charts';
 import { ApexOptions } from 'apexcharts';
+import useFetcher from '@/hooks/useFetcher';
+import { API_URL } from '@/config/api.js'
+import toIdrFormatNumber from '@/utils/toIdrFormatNumber';
 
 const CHART_DATA = [
     {
         name: 'Team A',
         type: 'column',
-        data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
+        data: []
     },
-    {
-        name: 'Team B',
-        type: 'area',
-        data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
-    },
-    {
-        name: 'Team C',
-        type: 'line',
-        data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
-    }
 ];
 
 export const AppWebsiteVisits = (): JSX.Element => {
+    const [donationTotalLastYear, setDonationsTotalLastYear] = useState<Number[]>([])
+    const [labels, setLabels] = useState<String[]>([])
+    const fetcher = useFetcher()
+
     const chartOptions: ApexOptions = merge(BaseOptionChart(), {
         stroke: { width: [0, 2, 3] },
         plotOptions: { bar: { columnWidth: '11%', borderRadius: 4 } },
         fill: { type: ['solid', 'gradient', 'solid'] },
-        labels: [
-            '01/01/2003',
-            '02/01/2003',
-            '03/01/2003',
-            '04/01/2003',
-            '05/01/2003',
-            '06/01/2003',
-            '07/01/2003',
-            '08/01/2003',
-            '09/01/2003',
-            '10/01/2003',
-            '11/01/2003'
-        ],
+        labels: labels,
         xaxis: { type: 'datetime' },
         tooltip: {
             shared: true,
@@ -48,7 +33,7 @@ export const AppWebsiteVisits = (): JSX.Element => {
             y: {
                 formatter: (y) => {
                     if (typeof y !== 'undefined') {
-                        return `${y.toFixed(0)} visits`;
+                        return `${toIdrFormatNumber(y.toFixed(0))}`;
                     }
                     return y;
                 }
@@ -56,13 +41,34 @@ export const AppWebsiteVisits = (): JSX.Element => {
         }
     });
 
+    const getDonationsLastYear = async () => {
+        try {
+            const response = await fetcher(`${API_URL}/summary/donations`)
+            setLabels(response.data.data.labels)
+            setDonationsTotalLastYear(response.data.data.donationsCounts)
+        } catch (error: any) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getDonationsLastYear()
+    }, [])
+
+    const chatData = [
+        {
+            ...CHART_DATA[0],
+            data: donationTotalLastYear
+        }
+    ]
+
     return (
         <Card>
             <CardHeader title="Donation" subheader="(+43%) than last year" />
             <Box sx={{ p: 3, pb: 1 }} dir="ltr">
                 <ReactApexChart
                     type="line"
-                    series={CHART_DATA}
+                    series={chatData}
                     options={chartOptions}
                     height={364}
                 />
