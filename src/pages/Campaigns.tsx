@@ -35,6 +35,7 @@ const TABLE_HEAD: HeaderLabel[] = [
     { id: 'deadline', label: 'Deadline', alignRight: false },
     { id: 'collected', label: 'Collected', alignRight: false },
     { id: 'remainingDays', label: 'RemainingDays', alignRight: false },
+    { id: 'permitDocument', label: 'Permit Doc', alignRight: false },
     { id: 'createdAt', label: 'Created At', alignRight: false },
     { id: 'status', label: 'Status', alignRight: false },
 ];
@@ -81,6 +82,7 @@ interface Campaign {
   collected: number;
   remainingDays: string;
   active: boolean;
+  permitDocument: string;
   _links: object;
   createdAtDateOnly: string;
 }
@@ -222,6 +224,7 @@ const Campaigns = (): JSX.Element => {
                                                 deadline,
                                                 collected,
                                                 remainingDays,
+                                                permitDocument,
                                                 slug,
                                                 active,
                                                 status,
@@ -258,6 +261,9 @@ const Campaigns = (): JSX.Element => {
                                                     <TableCell align="left">{deadline}</TableCell>
                                                     <TableCell align="left">{collected}</TableCell>
                                                     <TableCell align="left">{remainingDays} days</TableCell>
+                                                    <TableCell align="left">
+                                                        <a href={permitDocument} target="_blank" rel="noopener noreferrer">show</a>
+                                                    </TableCell>
                                                     <TableCell align="left">{createdAtDateOnly}</TableCell>
                                                     <TableCell align="left">
                                                         <Label
