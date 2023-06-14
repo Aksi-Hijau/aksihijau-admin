@@ -1,3 +1,3 @@
-const API_URL = " https://rational-text-381300.et.r.appspot.com/api";
+const API_URL = process.env.API_URL;
 
 export { API_URL };
